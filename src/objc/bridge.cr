@@ -78,11 +78,11 @@ end
 
 struct Tuple
   def map_to_objc
-    {% if @length == 0 %}
+    {% if @type.size == 0 %}
       self
     {% else %}
       {
-        {% for i in 0 ... @length %}
+        {% for i in 0 ... @type.size %}
           self[{{i}}].to_objc,
         {% end %}
       }
@@ -110,5 +110,3 @@ module Crocoa
     LibObjC.objc_msgSend_fpret(objc_target, selector_name.to_sel.to_objc, *args.map_to_objc)
   end
 end
-
-

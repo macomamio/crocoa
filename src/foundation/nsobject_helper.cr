@@ -28,10 +28,10 @@ macro objc_method_helper(receiver, method_name, args = nil, returnType = nil, cr
   # ???? unable to extract type restriction on its own macro
   {{ "##{crystal_method ||= method_name}".id }}
   {{ "##{args ||= [] of Symbol}".id }}
-  def {{crystal_method.id}}({% for i in 0 ... args.length %}{% if i > 0 %} , {% end %} {{"arg#{i}".id}} {%if args[i] != :id && args[i] != :NSUInteger %}{% if args[i] == :BOOL %}: Bool{% end %}{% if args[i] == :NSString %}: String|NSString {% end %}{% if args[i] == :SEL %}: Selector|String? {% end %}{% if args[i] == :const_char_ptr %}: String {% end %}{% end %}{% end %})
+  def {{crystal_method.id}}({% for i in 0 ... args.size %}{% if i > 0 %} , {% end %} {{"arg#{i}".id}} {%if args[i] != :id && args[i] != :NSUInteger %}{% if args[i] == :BOOL %}: Bool{% end %}{% if args[i] == :NSString %}: String|NSString {% end %}{% if args[i] == :SEL %}: Selector|String? {% end %}{% if args[i] == :const_char_ptr %}: String {% end %}{% end %}{% end %})
 
     res = Crocoa.send_msg({{receiver}}, {{method_name}}
-      {% for i in 0 ... args.length %}
+      {% for i in 0 ... args.size %}
         , objc_method_arg({{"arg#{i}".id}}, {{args[i]}})
       {% end %}
     )

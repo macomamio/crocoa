@@ -43,8 +43,8 @@ lib LibObjC
     ASSIGN  = 0u64,
     RETAIN_NONATOMIC  = 1u64,
     COPY_NONATOMIC  = 3u64,
-    RETAIN  = 01401u64,
-    COPY  = 01403u64
+    RETAIN  = 0o1401u64,
+    COPY  = 0o1403u64
   end
   fun objc_getAssociatedObject (UInt8*, UInt8*) : UInt8*;
   fun objc_setAssociatedObject (UInt8*, UInt8*, UInt8*, AssociationPolicy) : Void

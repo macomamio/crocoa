@@ -15,7 +15,7 @@ module Crocoa
           {% if objc_class_name %}
             {{objc_class_name}}
           {% else %}
-            self.to_s["Crocoa::".length..-1]
+            self.to_s["Crocoa::".size..-1]
           {% end %}
         end
         NSClass.new class_name
